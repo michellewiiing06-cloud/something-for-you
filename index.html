@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Little Something For You ♡</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#0d0b0d;color:#f8f2f5;font-family:Arial,sans-serif}
+main{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
+.card{width:min(900px,100%);min-height:680px;background:linear-gradient(145deg,#171217,#0f0c10);border:1px solid #ffffff18;border-radius:30px;padding:30px 24px;box-shadow:0 25px 90px #000b;text-align:center}
+section{animation:fade .45s ease}
+.hidden{display:none!important}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+h1,h2{font-family:Georgia,serif}
+h1{font-size:clamp(42px,8vw,76px);margin:30px 0 12px}
+h2{font-size:clamp(28px,5vw,44px)}
+p{line-height:1.8}
+.text{max-width:720px;margin:18px auto;font-size:18px;white-space:pre-line}
+button{border:0;border-radius:999px;padding:13px 24px;margin:7px;background:#e96a9b;color:white;font-size:16px;font-weight:700;cursor:pointer}
+button:hover{transform:translateY(-1px)}
+input{width:min(340px,90%);padding:14px 18px;border-radius:999px;border:1px solid #e96a9b88;background:#100c10;color:white;font-size:18px;text-align:center}
+.hearts{font-size:24px;letter-spacing:9px;color:#ef78a8}
+.error{color:#ff9cac;min-height:26px}
+.good{color:#a7f5c4}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:720px;margin:20px auto}
+.cards button{margin:0;min-height:75px}
+.scroll{max-height:500px;overflow:auto;text-align:left;padding:8px 18px;border-radius:20px;background:#ffffff08}
+.scroll p{margin:8px 0;border-bottom:1px solid #ffffff0c;padding-bottom:7px}
+.quiz button{display:block;width:min(600px,94%);margin:10px auto}
+.letter{max-height:570px;overflow:auto;text-align:left;padding:25px 30px;background:#fff9f208;border-radius:22px;line-height:2;font-family:Georgia,serif;font-size:18px}
+.kisses{height:250px;position:relative;overflow:hidden;margin-top:10px}
+.kiss{position:absolute;bottom:-45px;font-size:42px;animation:fly 4.5s ease-out forwards}
+@keyframes fly{0%{opacity:0;transform:translateY(0) rotate(0)}12%{opacity:1}100%{opacity:0;transform:translateY(-300px) rotate(25deg)}}
+@media(max-width:650px){.card{padding:25px 14px}.cards{grid-template-columns:1fr}.letter{padding:18px;font-size:16px}}
+</style>
+</head>
+<body>
+<main><div class="card">
+
+<section id="welcome">
+<div class="hearts">♥ ♥ ♥ ♥ ♥</div>
+<h1>A Little Something For You</h1>
+<p class="text">Made with more love than you probably realize. ♡</p>
+<button onclick="go('password')">OPEN 💌</button>
+</section>
+
+<section id="password" class="hidden">
+<h2>Before you enter… 🔐</h2>
+<p>There is one tiny thing you need to remember.</p>
+<p><b>Hint: my birthday 🎂</b></p>
+<input id="pw" type="password" inputmode="numeric" placeholder="Enter password">
+<br><button onclick="unlock()">UNLOCK</button>
+<div id="pwmsg" class="error"></div>
+</section>
+
+<section id="inside" class="hidden">
+<h2>You got in. 🥹</h2>
+<p class="text">Okay, you actually remembered. 😭❤️
+
+Now you can see what I made for you.
+
+Don't rush through it.
+
+There's a lot here, and every part was made with you in mind.</p>
+<button onclick="go('likes')">LET'S GO →</button>
+</section>
+
+<section id="likes" class="hidden">
+<h2>100 Things I Like About You 💗</h2>
+<div id="likesList" class="scroll"></div>
+<button onclick="go('eyes')">NEXT →</button>
+</section>
+
+<section id="eyes" class="hidden">
+<h2>If You Could See Yourself Through My Eyes… 👀</h2>
+<p class="text">You'd probably understand why the little things matter so much.
+
+You'd see someone whose smile can change the entire mood of a conversation.
+
+You'd see the funny little habits, the random thoughts, the way you get excited about things you love, and all those tiny details you probably don't even notice about yourself.
+
+You'd see someone worth knowing deeply.
+
+Someone worth remembering.
+
+Someone who doesn't have to be perfect to be special.
+
+And honestly?
+
+I wish you could see what I see. ❤️</p>
+<button onclick="go('unsaid')">NEXT →</button>
+</section>
+
+<section id="unsaid" class="hidden">
+<h2>Things I Don't Say Enough 💭</h2>
+<p class="text">I appreciate you.
+
+I notice the little things.
+
+I remember more than I let on.
+
+You can make me smile without even trying.
+
+Sometimes a tiny message from you can completely change my day.
+
+And even when I don't say it properly…
+
+I'm really glad you're here. ❤️</p>
+<button onclick="go('memory')">NEXT →</button>
+</section>
+
+<section id="memory" class="hidden">
+<h2>A Little Memory 🫶</h2>
+<p class="text">Some memories aren't special because something huge happened.
+
+They're special because of who you were with.
+
+The random conversations.
+The stupid jokes.
+The moments that made absolutely no sense but somehow became unforgettable.
+
+Those are the moments I want to keep.
+
+The ordinary ones that became special simply because they were ours.</p>
+<button onclick="go('quiz')">ONE LITTLE QUIZ →</button>
+</section>
+
+<section id="quiz" class="hidden quiz">
+<h2>How Well Do You Know Me? 💗</h2>
+<p id="qtext"></p>
+<div id="qoptions"></div>
+<div id="qreaction"></div>
+</section>
+
+<section id="quizResult" class="hidden">
+<h2>You survived the quiz 😭</h2>
+<div id="quizScore" style="font-size:44px;color:#f29abb"></div>
+<p class="text">Whether you got everything right or not…
+
+I hope you know the answer to the most important question already. ❤️</p>
+<button onclick="go('transition')">ONE LAST THING…</button>
+</section>
+
+<section id="transition" class="hidden">
+<div class="hearts">♥ ♥ ♥</div>
+<h1>Okay…</h1>
+<p class="text">This is the part I really wanted you to see.</p>
+<button onclick="go('letter')">OPEN THE LETTER 💌</button>
+</section>
+
+<section id="letter" class="hidden">
+<h2>A Letter For You 💌</h2>
+<div class="letter">
+<p>Hey you,</p>
+<p>I honestly don't know if a website can ever say everything I want to say, but I wanted to try anyway.</p>
+<p>I wanted to make something that you could come back to whenever you wanted, something that would remind you that someone sat down and thought about all the little things that make you special.</p>
+<p>I like the obvious things, of course. Your smile. Your laugh. Your voice. The way you talk. The things you get excited about.</p>
+<p>But I think what I like most are the little things. The things that probably don't even feel important to you. The random messages. The weird jokes. The tiny reactions. The moments where you don't even realize you're making someone smile.</p>
+<p>You don't have to constantly do something amazing to be worth loving. You don't have to be perfect. You don't have to have everything figured out.</p>
+<p>You can just be you.</p>
+<p>And somehow, that's more than enough.</p>
+<p>I hope you know how much the little things matter. I hope you know that your presence can make an ordinary day feel different. I hope you know that there are memories I wouldn't trade for anything, simply because you were part of them.</p>
+<p>If I could give you one thing, it would probably be the ability to see yourself the way the people who care about you see you.</p>
+<p>Because I think you'd be surprised.</p>
+<p>You'd see someone funny. Someone memorable. Someone with a personality that can't really be copied. Someone who can make people care simply by being themselves.</p>
+<p>And if you ever forget that, come back here.</p>
+<p>Read this again.</p>
+<p>Remember that someone took the time to make an entire little world just to tell you something simple:</p>
+<p><b>You matter.</b></p>
+<p>Thank you for being you. Thank you for the conversations, the memories, the laughs, the chaos, and all the little moments in between.</p>
+<p>And after all of this…</p>
+<p>I still love you. ❤️</p>
+<p>Always,</p>
+<p><b>Me ♡</b></p>
+</div>
+<button onclick="go('final')">FINALLY… ❤️</button>
+</section>
+
+<section id="final" class="hidden">
+<h1>I Still Love You. ❤️</h1>
+<p class="text">That's it.
+
+No more puzzles.
+No more questions.
+Just one last thing I wanted you to know.</p>
+<div id="kisses" class="kisses"></div>
+<p style="font-size:24px">💋 💋 💋</p>
+</section>
+
+</div></main>
+
+<script>
+const sections=["welcome","password","inside","likes","eyes","unsaid","memory","quiz","quizResult","transition","letter","final"];
+function go(id){
+  sections.forEach(x=>document.getElementById(x).classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+  window.scrollTo(0,0);
+  if(id==="final") launchKisses();
+}
+function unlock(){
+  const value=document.getElementById("pw").value.trim();
+  if(value==="21112011"){document.getElementById("pwmsg").textContent="";go("inside")}
+  else document.getElementById("pwmsg").textContent="Nope 😭 Hint: my birthday.";
+}
+
+const likes=[
+"Your smile","Your sense of humour","The way you make me laugh","Your little habits","The way you talk","Your random thoughts","Your kindness","Your patience","Your honesty","The way you make ordinary moments memorable",
+"Your confidence","Your silly side","The way you listen","Your reactions to things","Your laugh","The little things you remember","Your messages","Your jokes","The way you get excited about things","Your curiosity",
+"The way you make conversations interesting","Your voice","Your creativity","Your effort","Your determination","Your goofy moments","The way you care","Your little expressions","The way you notice small things","Your honesty even when it's difficult",
+"Your energy","Your warmth","Your imagination","Your spontaneity","The way you make me feel comfortable","Your ability to cheer me up","Your random stories","Your opinions","The way you explain things","Your enthusiasm",
+"Your thoughtfulness","The way you remember conversations","Your little quirks","Your sense of adventure","Your patience with me","The way you tease me","Your serious side","Your playful side","Your determination to keep going","The way you make me feel heard",
+"Your reactions when you're surprised","Your excitement over little things","Your silly jokes","The way you can turn a boring moment into a fun one","Your confidence in the things you love","Your ability to make me smile without trying","Your little messages","Your generosity","Your loyalty","The way you support people you care about",
+"Your curiosity about the world","Your random sense of humour","The way you remember tiny details","Your individuality","The way you aren't afraid to be yourself","Your random ideas","Your reactions when something makes you happy","Your ability to make conversations last forever","Your little imperfections","The way you make me feel included",
+"Your genuine side","Your ability to make me forget a bad day","Your unexpected compliments","The way you celebrate little wins","Your patience when I ramble","Your weird jokes","Your ability to surprise me","The way you make memories without even planning to","Your honesty about how you feel","Your little routines",
+"Your determination to do things your way","Your enthusiasm when talking about something you love","The way you make people feel welcome","Your ability to make me laugh at the dumbest things","Your thoughtful moments","Your confidence","Your softness underneath everything else","Your ability to make an ordinary conversation special","The way you remember things I forget","Your sense of humour when things get awkward",
+"Your little reactions","Your willingness to listen","Your ability to make me feel appreciated","The memories we've already made","The memories we haven't made yet","The fact that you're completely yourself","The way having you around feels natural","The fact that you're you","Simply… you. ❤️"
+];
+document.getElementById("likesList").innerHTML=likes.map((x,i)=>"<p><b>"+(i+1)+".</b> "+x+"</p>").join("");
+
+const questions=[
+["What's my favourite colour?",["Grey","Pink","Black","Blue"],0],
+["What's something I love doing?",["Sleeping","Singing","Cooking","Running"],1],
+["What kind of vibe do I like?",["Formal","Cottagecore","Y2K","Sporty"],2],
+["What instantly makes me happy?",["Homework","A sweet text","Being ignored","An alarm clock 😭"],1],
+["What's something that makes me happiest?",["A smile","A tax form","An alarm","A traffic jam"],0]
+];
+let q=0,score=0;
+function startQuiz(){q=0;score=0;go("quiz");renderQ()}
+function renderQ(){
+ document.getElementById("qtext").textContent=questions[q][0];
+ document.getElementById("qreaction").textContent="";
+ const box=document.getElementById("qoptions");box.innerHTML="";
+ questions[q][1].forEach((a,i)=>{const b=document.createElement("button");b.textContent=a;b.onclick=()=>answer(i);box.appendChild(b)})
+}
+function answer(i){
+ const ok=i===questions[q][2];
+ if(ok){score++;document.getElementById("qreaction").textContent="Correct! You know me 😭❤️";document.getElementById("qreaction").className="good"}
+ else{document.getElementById("qreaction").textContent="😭 I'll forgive you.";document.getElementById("qreaction").className="error"}
+ document.querySelectorAll("#qoptions button").forEach(b=>b.disabled=true);
+ setTimeout(()=>{q++;if(q<questions.length)renderQ();else{go("quizResult");document.getElementById("quizScore").textContent=score+" / 5"}},700)
+}
+function launchKisses(){
+ const box=document.getElementById("kisses");box.innerHTML="";
+ for(let i=0;i<40;i++){const k=document.createElement("span");k.className="kiss";k.textContent="💋";k.style.left=Math.random()*96+"%";k.style.animationDelay=Math.random()*2+"s";box.appendChild(k)}
+}
+</script>
+</body>
+</html>
